@@ -1,23 +1,45 @@
 import { Button, ListItem, ListItemText } from '@mui/material'
-import { green } from '@mui/material/colors'
-import React, { useState } from 'react'
-import { todosColl } from './firebase-config'
+import React from 'react'
+import { supabase } from "./client";
 
-function TasksList({ todo, inprogress, id }) {
+const TasksList = ({
+    todo,
+    inprogress,
+    id,
+    getTasks,
+    isChanged,
+    setIsChanged
+}) => {
 
-    const toggleProgress = () => {
-        todosColl.doc(id).update({ inprogress: !inprogress })
+    const toggleProgress = async () => {
+        await supabase
+            .from('todos')
+            .update({ inprogress: !inprogress })
+            .match({ id })
+        getTasks();
+        setIsChanged(true);
+
     }
-    const removeTask = () => {
-        todosColl.doc(id).delete();
+    const removeTask = async () => {
+        await supabase
+            .from('todos')
+            .delete()
+            .match({ id })
+        getTasks();
+        setIsChanged(true);
     }
+
     return (
         <div key={id} className='taskItem'>
-            <ListItem>
-                <ListItemText primary={todo} secondary={inprogress ? "In Progress" : "Completed"} />
+            <ListItem className={` ${isChanged && "changed"}`} >
+                <ListItemText
+                    primary={todo}
+                    secondary={inprogress ? "In Progress" : "Completed"} />
 
             </ListItem>
-            <Button onClick={toggleProgress}  >{inprogress ? "Done" : "unDone"}</Button>
+            <Button onClick={toggleProgress}            >
+                {inprogress ? "Done" : "unDone"}
+            </Button>
             <Button onClick={removeTask}>
                 <svg xmlns="http://www.w3.org/2000/svg"
                     width="16" height="16"
