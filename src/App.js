@@ -14,22 +14,21 @@ function App() {
   useEffect(() => {
     getTasks();
     setIsLoading(true);
-  }, [task])
+  }, [])
 
   const getTasks = async () => {
+
     const { data } = await supabase
       .from("todos")
       .select()
-    // console.log(data);
+    console.log(data);
     setTaskList(data.map(doc => ({
       id: doc.id,
       todo: doc.todo,
       inprogress: doc.inprogress,
-      // time: doc.time,
     })).sort((a, b) => a.id - b.id));
     setIsLoading(false);
   }
-  // console.log(taskList);
 
   const addTask = async (e) => {
     e.preventDefault();
@@ -45,14 +44,30 @@ function App() {
         ]
       )
     setTask("");
-    getTasks();
   }
+  const mySubscription = supabase
+    .from('todos')
+    .on('INSERT', (payload) => {
+      getTasks()
+      console.log('Change received!', payload)
+    })
+    .on('DELETE', (payload) => {
+      getTasks()
+      console.log('Change received!', payload)
+    })
+    .on('UPDATE', (payload) => {
+      getTasks()
+      console.log('Change received!', payload)
+    })
+    .subscribe()
 
-  const resetPage = () => {
-    setIsLoading(true)
-    setIsChanged(false)
-    window.location.reload()
-  }
+
+
+  // const resetPage = () => {
+  //   setIsLoading(true)
+  //   setIsChanged(false)
+  //   window.location.reload()
+  // }
 
   return (
     <div className="App">
@@ -98,9 +113,8 @@ function App() {
           })
           }
         </div>
-        <Button style={{ display: (isChanged ? "block" : "none") }}
-          onClick={resetPage}>
-          something changes... set changes?
+        <Button style={{ display: (isLoading ? "block" : "none") }} >
+          something changes...please wait to update
         </Button>
       </div>
 

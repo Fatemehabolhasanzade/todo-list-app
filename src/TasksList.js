@@ -12,27 +12,35 @@ const TasksList = ({
 }) => {
 
     const toggleProgress = async () => {
-        await supabase
+        const { data } = await supabase
             .from('todos')
             .update({ inprogress: !inprogress })
             .match({ id })
-        getTasks();
+        // getTasks();
         setIsChanged(true);
+        console.log("task progress changed is :", data.todo);
 
     }
     const removeTask = async () => {
-        await supabase
+        const { data } = await supabase
             .from('todos')
             .delete()
             .match({ id })
-        getTasks();
+        // getTasks();
         setIsChanged(true);
+        console.log("task deleted is:", data.todo);
+
     }
+
+
+
+
 
     return (
         <div key={id} className='taskItem'>
-            <ListItem className={` ${isChanged && "changed"}`} >
+            <ListItem >
                 <ListItemText
+                    // className={` ${isChanged && "changed"}`}
                     primary={todo}
                     secondary={inprogress ? "In Progress" : "Completed"} />
 
