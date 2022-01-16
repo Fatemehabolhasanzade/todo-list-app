@@ -1,5 +1,6 @@
 @import url("https://fonts.googleapis.com/css2?family=Source+Sans+Pro&display=swap");
-
+@import url("https://fonts.googleapis.com/css2?family=Source+Sans+Pro&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Patrick+Hand&family=Source+Sans+Pro&display=swap");
 * {
   margin: 0;
   padding: 0;
@@ -12,18 +13,113 @@
   flex-wrap: nowrap;
   justify-content: flex-start;
   align-content: center;
-  align-items: center;
+  align-items: stretch;
   width: 60vw;
   height: 100vh;
+  border: 1px solid gray;
   overflow-y: auto;
   margin: 0 auto;
+  padding: 0 1em;
+  /* font-family: "Source Sans Pro", sans-serif; */
+  font-family: "Patrick Hand", cursive;
+  background: url("./wood-background-1.jpg");
 }
-/* @media only screen and (max-width: 600px) {
-  width: 100vw;
-} */
-
-header {
-  margin: 2em;
+@media only screen and (max-width: 600px) {
+  .container {
+    width: 100vw;
+    height: 100vh;
+  }
+}
+.firstLoad {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  justify-content: space-evenly;
+  align-items: center;
+  height: 100vh;
+  background: url("./wood-background-1.jpg");
+  color: #dedede;
+  font-size: larger;
+}
+.firstLoad span {
+  text-transform: capitalize;
+  font-style: italic;
+  font-weight: bold;
+  font-size: larger;
+}
+.wellcome {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  justify-items: auto;
+  justify-content: flex-start;
+  align-items: flex-end;
+}
+.startApp {
+  background-color: #7b4d35;
+  padding: 0.5em;
+  border-radius: 10px;
+}
+.startApp:hover {
+  cursor: pointer;
+}
+.header {
+  color: #555;
+  background-color: #f5f5f5;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  justify-content: space-between;
+  align-items: center;
+}
+.setting {
+  position: relative;
+}
+.settingItems {
+  position: inherit;
+  border-right: 2px solid;
+  padding-right: 1em;
+  z-index: 2;
+  top: 50px;
+  right: 185px;
+  font-size: medium;
+  transition: 1s ease;
+  display: flex;
+  flex-direction: column;
+  flex-wrap: nowrap;
+  justify-content: flex-start;
+  align-items: center;
+}
+.exitApp {
+  border-top: 1px solid;
+}
+.form {
+  display: flex;
+  flex-wrap: nowrap;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: nowrap;
+  margin-top: 2em;
+}
+.form textarea {
+  height: 25px;
+  border: none;
+  border-bottom: 1px dotted #1a1a1a;
+  font-family: "Patrick Hand";
+  font-size: medium;
+  text-align: center;
+  background-color: whitesmoke;
+}
+.form span {
+  margin-right: 1em;
+  font-size: medium;
+  font-style: italic;
+}
+@media only screen and (max-width: 600px) {
+  .form {
+    flex-wrap: wrap;
+  }
 }
 .tasks {
   display: flex;
@@ -32,16 +128,124 @@ header {
   justify-content: flex-start;
   align-items: stretch;
   overflow-y: auto;
+  height: 90vh;
+  background-color: #f5f5f5;
+  color: #555;
+  font-size: 1.5em;
+  padding: 10px !important;
+  margin-top: 1em;
+  border: 1px solid #dedede;
+}
+.taskItem:last-child {
+  border-bottom: none;
 }
 .taskItem {
   display: flex;
   flex-direction: row;
   align-items: flex-end;
+  border-bottom: 1px dotted #ccc;
+  text-indent: 6px;
+  height: auto;
+  text-transform: capitalize;
+  position: relative;
+}
+.taskRemove {
+  display: none;
+}
+.taskItem:hover .taskRemove {
+  display: block;
+  position: absolute;
+  right: 0;
+}
+.noTodo {
+  display: block;
+  font-size: x-small;
+  color: red;
+}
+.taskItem:hover {
+  background-color: #f0f0f0;
 }
 button {
   margin: 0.5em;
   padding: 0;
 }
-.changed {
-  background-color: rgb(246, 159, 159);
+.loading {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: large;
+  color: green;
+  flex-basis: 100%;
+  height: 20vh;
+  background-image: url("./hearts.svg");
+}
+.taskEdit {
+  padding-right: 5px;
+  margin-right: 1px;
+  border-right: 1px solid #ffaa9f;
+}
+.listItemText {
+  margin-left: 1px;
+  padding-left: 2px;
+  border-left: 1px solid #ffaa9f;
+}
+
+.listItem {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: stretch;
+  flex-wrap: nowrap;
+}
+.done {
+  text-decoration: line-through;
+  opacity: 0.6;
+}
+.exitPage {
+  background: url("./wood-background-1.jpg");
+  color: #dedede;
+  font-size: xx-large;
+  height: 100vh;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+}
+.lastpage {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 1em;
+  justify-content: flex-end;
+  flex-wrap: nowrap;
+}
+.lastpage .thanks {
+  align-self: flex-start;
+}
+.lastpage a {
+  align-self: flex-end;
+  font-size: small;
+  background-color: #42230e;
+  border-radius: 10%;
+  padding: 0.5em;
+  color: wheat;
+  text-decoration: none;
+  margin-bottom: 0.5em;
+}
+.lastpage .backToApp {
+  align-self: self-end;
+  font-size: medium;
+  background-color: #42230e;
+  border-radius: 10%;
+  padding: 0.5em;
+  color: wheat;
+  margin-bottom: 0.5em;
+}
+.contact {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  align-items: center;
+  justify-content: space-between;
+}
+.backToApp {
 }
