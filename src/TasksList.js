@@ -20,6 +20,7 @@ const TasksList = ({
     };
     const closeDialog = () => {
         setOpen(false);
+        console.log("trying to close dialog!")
         getTasks();
     };
 
@@ -37,13 +38,11 @@ const TasksList = ({
     const removeTask = async () => {
         setOpen(false);
         setIsLoading(true);
-
-        const { data } = await supabase
+        await supabase
             .from('todos')
             .delete()
             .match({ id })
         getTasks();
-        console.log("task deleted is:", data.todo);
     }
 
 
@@ -52,7 +51,6 @@ const TasksList = ({
             <div className='listItem'>
                 <div className='taskEdit'>
                     <div className='taskRemove' onClick={handleClickOpen} >
-
                         <svg xmlns="http://www.w3.org/2000/svg"
                             width="16" height="16" fill="red"
                             className="bi bi-x-square"
@@ -94,14 +92,9 @@ const TasksList = ({
                     </div>
                 </div>
                 <div className={`listItemText ${!inprogress ? "done" : undefined}`}>
-
                     {todo}
                 </div>
-
-
             </div>
-
-
         </div>
     )
 }

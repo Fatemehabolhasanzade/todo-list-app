@@ -8,7 +8,6 @@ function App() {
   const [task, setTask] = useState("");
   const [taskList, setTaskList] = useState([]);
   const [isLoading, setIsLoading] = useState(false)
-  const [isChanged, setIsChanged] = useState(false)
   const [firstLoad, setFirstLoad] = useState(false)
   const [closing, setClosing] = useState(false)
   const [setting, setSetting] = useState(false)
@@ -78,16 +77,14 @@ function App() {
         <div className="wellcome">
           <h1>welcom to the
             <span> To Do List </span> application</h1>
-
-
           <p className="owner">presented by <span>Rezvan</span></p>
         </div>
 
         <div className="startApp" onClick={startApp}>
           <span>go to the app</span></div>
       </div>}
-      {!firstLoad && !closing && <div className='container'>
 
+      {!firstLoad && !closing && <div className='container'>
         <div className="tasks">
           <div className="header">
             <h1>To Do list</h1>
@@ -109,9 +106,9 @@ function App() {
               <div className="exitApp" onClick={exitApp}>
                 exit app
               </div>
-
             </div>}
           </div>
+
           {taskList.map(item => {
             return (
               <TasksList
@@ -120,8 +117,6 @@ function App() {
                 inprogress={item.inprogress}
                 id={item.id}
                 getTasks={getTasks}
-                isChanged={isChanged}
-                setIsChanged={setIsChanged}
                 setIsLoading={setIsLoading}
               />
 
@@ -169,7 +164,7 @@ function App() {
                 <path fill-rule="evenodd" d="M8 1.314C12.438-3.248 23.534 4.735 8 15-7.534 4.736 3.562-3.248 8 1.314z" />
               </svg></p>
 
-            <a href="mailto:fatemeh.abolhasanzade@gmail.com" target={"_blank"}>contact us</a>
+            {/* <a href="mailto:fatemeh.abolhasanzade@gmail.com" target={"_blank"}>contact us</a> */}
             <p className="backToApp" onClick={() => setClosing(false)} >back to application</p>
           </div>
         </div>
