@@ -25,7 +25,7 @@ function App() {
     const { data } = await supabase
       .from("todos")
       .select('*')
-    console.log(data);
+    // console.log(data);
     setTaskList(data.map(doc => ({
       id: doc.id,
       todo: doc.todo,
@@ -38,12 +38,11 @@ function App() {
     setTask(e.target.value);
     setNoTodo(false);
   }
-
-
   const addTask = async (e) => {
     e.preventDefault();
-    console.log("you are trying to add a task");
-    if (task) {
+
+    if (task !== "") {
+      setNoTodo(false);
       setIsLoading(true);
       await supabase
         .from('todos')
@@ -84,8 +83,8 @@ function App() {
           <span>go to the app</span></div>
       </div>}
 
-      {!firstLoad && !closing && <div className='container'>
-        <div className="tasks">
+      {!firstLoad && !closing && <div className="container" >
+        {!isLoading && <div className="tasks">
           <div className="header">
             <h1>To Do list</h1>
             {!setting && <svg xmlns="http://www.w3.org/2000/svg"
@@ -118,6 +117,9 @@ function App() {
                 id={item.id}
                 getTasks={getTasks}
                 setIsLoading={setIsLoading}
+                tasksList={taskList}
+                setTaskList={setTaskList}
+                isLoading={isLoading}
               />
 
             )
@@ -136,39 +138,44 @@ function App() {
               onChange={onChangeHandler}
               variant="outlined"
             />}
+            {!noTodo && <button type="submit"
+              // style={{ display: "none" }}
+              variant="outlined">
+              write it!
+            </button>}
             {noTodo && <div className="noTodo">
               please insert a task in the field first
             </div>}
-
-            <button
-              type="submit"
-              onClick={() => setNoTodo(false)}
-              // style={{ display: "none" }}
-              variant="outlined">
-              {noTodo && "I get it!"}
-              {!noTodo && "write it!"}</button>
+            {noTodo && <button onClick={() => setNoTodo(false)}>
+              I get it!</button>}
           </form>
-          {isLoading && <div
-            className="loading">
-            please wait...
-          </div>}
-        </div>
-      </div>
-      }
-      {
-        closing &&
+
+
+        </div>}
+
+        {isLoading && <div
+          className="loading">
+          <div className="circle-border">
+            <div className="circle-core"></div>
+          </div>
+          <p>loading...</p>
+        </div>}
+      </div>}
+      {closing &&
         <div className="exitPage">
           <div className="lastpage container">
             <p className="thanks">Thank you!
-              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="red" className="bi bi-heart-fill" viewBox="0 0 16 16">
-                <path fill-rule="evenodd" d="M8 1.314C12.438-3.248 23.534 4.735 8 15-7.534 4.736 3.562-3.248 8 1.314z" />
+              <svg xmlns="http://www.w3.org/2000/svg"
+                width="16" height="16" fill="red"
+                className="bi bi-heart-fill"
+                viewBox="0 0 16 16">
+                <path fillRule="evenodd" d="M8 1.314C12.438-3.248 23.534 4.735 8 15-7.534 4.736 3.562-3.248 8 1.314z" />
               </svg></p>
 
             {/* <a href="mailto:fatemeh.abolhasanzade@gmail.com" target={"_blank"}>contact us</a> */}
             <p className="backToApp" onClick={() => setClosing(false)} >back to application</p>
           </div>
-        </div>
-      }
+        </div>}
     </div >
   );
 }

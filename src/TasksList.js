@@ -11,17 +11,19 @@ const TasksList = ({
     id,
     getTasks,
     setIsLoading,
+    tasksList,
+    setTaskList
 
 }) => {
     const [open, setOpen] = useState(false);
 
     const handleClickOpen = () => {
         setOpen(true);
+
     };
-    const closeDialog = () => {
+    const handleClose = () => {
         setOpen(false);
-        console.log("trying to close dialog!")
-        getTasks();
+
     };
 
 
@@ -35,14 +37,18 @@ const TasksList = ({
 
     }
 
+
     const removeTask = async () => {
         setOpen(false);
         setIsLoading(true);
-        await supabase
-            .from('todos')
-            .delete()
-            .match({ id })
-        getTasks();
+        console.log(todo);
+        // let newTaskList = 
+        // setTaskList(newTaskList)
+        // await supabase
+        //     .from('todos')
+        //     .delete()
+        //     .match({ id })
+        // getTasks();
     }
 
 
@@ -58,28 +64,30 @@ const TasksList = ({
                             <path d="M14 1a1 1 0 0 1 1 1v12a1 1 0 0 1-1 1H2a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1h12zM2 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H2z" />
                             <path d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z" />
                         </svg>
-                        <div>
-                            <Dialog
-                                open={open}
-                                aria-labelledby="alert-dialog-title"
-                                aria-describedby="alert-dialog-description"
-                            >
-                                <DialogTitle id="alert-dialog-title">
-                                    {`are you sure you want to delete "${todo}"?`}
-                                </DialogTitle>
-                                <DialogContent>
-                                    <DialogContentText id="alert-dialog-description">
-                                        deleting the task will remove it from history,
-                                        are you still sure you want to delete it?
-                                    </DialogContentText>
-                                </DialogContent>
-                                <DialogActions>
-                                    <Button onClick={closeDialog} autoFocus> Forget about it!</Button>
-                                    <Button onClick={removeTask} > I'm sure.</Button>
-                                </DialogActions>
-                            </Dialog>
-                        </div>
                     </div>
+                    <div>
+                        <Dialog
+                            open={open}
+                            onClose={handleClose}
+                            aria-labelledby="alert-dialog-title"
+                            aria-describedby="alert-dialog-description"
+                        >
+                            <DialogTitle id="alert-dialog-title">
+                                {`are you sure you want to delete "${todo}"?`}
+                            </DialogTitle>
+                            <DialogContent>
+                                <DialogContentText id="alert-dialog-description">
+                                    Deleting the task will remove it from history,
+                                    Are you still sure you want to delete it?
+                                </DialogContentText>
+                            </DialogContent>
+                            <DialogActions>
+                                <Button onClick={handleClose} autoFocus> Forget about it!</Button>
+                                <Button onClick={removeTask} > I'm sure.</Button>
+                            </DialogActions>
+                        </Dialog>
+                    </div>
+
                     <div onClick={toggleProgress} className="taskProgress" >
                         {inprogress
                             ? <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="green" className="bi bi-square" viewBox="0 0 16 16">

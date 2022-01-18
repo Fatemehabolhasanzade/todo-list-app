@@ -170,14 +170,42 @@ button {
   padding: 0;
 }
 .loading {
+  width: 200px;
+  height: 200px;
   display: flex;
   justify-content: center;
   align-items: center;
+  align-self: center;
+}
+.circle-border {
+  width: 100px;
+  height: 100px;
+  padding: 2px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 50%;
+  background: linear-gradient(0deg, rgb(0 0 0 /0%) 33%, rgb(169 80 7) 100%);
+  animation: spin 2s linear infinite;
+}
+.circle-core {
+  width: 100%;
+  height: 100%;
+  background-color: #160805;
+  border-radius: 50%;
+}
+.loading p {
+  position: absolute;
+  color: rgb(169 80 7);
   font-size: large;
-  color: green;
-  flex-basis: 100%;
-  height: 20vh;
-  background-image: url("./hearts.svg");
+}
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
 }
 .taskEdit {
   padding-right: 5px;
