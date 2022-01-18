@@ -23,7 +23,6 @@ const TasksList = ({
     };
     const handleClose = () => {
         setOpen(false);
-
     };
 
 
@@ -41,14 +40,12 @@ const TasksList = ({
     const removeTask = async () => {
         setOpen(false);
         setIsLoading(true);
-        console.log(todo);
-        // let newTaskList = 
-        // setTaskList(newTaskList)
-        // await supabase
-        //     .from('todos')
-        //     .delete()
-        //     .match({ id })
-        // getTasks();
+
+        await supabase
+            .from('todos')
+            .delete()
+            .match({ id })
+        getTasks();
     }
 
 
