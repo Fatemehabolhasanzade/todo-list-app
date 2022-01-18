@@ -38,6 +38,7 @@ const TasksList = ({
     const removeTask = async () => {
         setOpen(false);
         setIsLoading(true);
+
         await supabase
             .from('todos')
             .delete()
