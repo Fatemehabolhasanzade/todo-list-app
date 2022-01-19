@@ -71,6 +71,9 @@
   flex-wrap: nowrap;
   justify-content: space-between;
   align-items: center;
+  margin-bottom: 0.5em;
+  border-bottom: 1px solid #ffaa9f;
+  padding-bottom: 0.5em;
 }
 .setting {
   position: relative;
@@ -121,6 +124,13 @@
     flex-wrap: wrap;
   }
 }
+
+.addingSampleText {
+  display: inline-block;
+  margin-left: 10px;
+  padding-left: 8px;
+  border-left: 1px solid #ffaa9f;
+}
 .tasks {
   display: flex;
   flex-direction: column;
@@ -151,6 +161,11 @@
 }
 .taskRemove {
   display: none;
+}
+.deleting {
+  display: block;
+  position: absolute;
+  right: 0;
 }
 .taskItem:hover .taskRemove {
   display: block;
@@ -274,6 +289,4 @@ button {
   flex-wrap: nowrap;
   align-items: center;
   justify-content: space-between;
-}
-.backToApp {
 }

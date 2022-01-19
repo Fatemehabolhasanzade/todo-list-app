@@ -1,6 +1,7 @@
 import "./App.css";
 import React, { useState, useEffect } from "react";
 // import { TextField, Button } from "@mui/material";
+import CircularProgress from '@mui/material/CircularProgress';
 import { supabase } from './client'
 import TasksList from "./TasksList";
 
@@ -12,6 +13,7 @@ function App() {
   const [closing, setClosing] = useState(false)
   const [setting, setSetting] = useState(false)
   const [noTodo, setNoTodo] = useState(false);
+  const [adding, setAdding] = useState(false);
 
 
   useEffect(() => {
@@ -32,6 +34,8 @@ function App() {
       inprogress: doc.inprogress,
     })).sort((a, b) => b.id - a.id));
     setIsLoading(false);
+    setAdding(false);
+
 
   }
   const onChangeHandler = (e) => {
@@ -43,7 +47,7 @@ function App() {
 
     if (task !== "") {
       setNoTodo(false);
-      setIsLoading(true);
+      setAdding(true);
       await supabase
         .from('todos')
         .insert(
@@ -107,21 +111,30 @@ function App() {
               </div>
             </div>}
           </div>
-
+          {adding && <div >
+            <CircularProgress
+              color="success"
+              style={{
+                width: "20px",
+                height: "20px",
+              }}
+            />
+            <p className="addingSampleText"              >
+              new task is writing...
+            </p>
+          </div>}
           {taskList.map(item => {
             return (
+
               <TasksList
                 key={item.id}
                 todo={item.todo}
                 inprogress={item.inprogress}
                 id={item.id}
                 getTasks={getTasks}
-                setIsLoading={setIsLoading}
                 tasksList={taskList}
                 setTaskList={setTaskList}
-                isLoading={isLoading}
               />
-
             )
           })
           }
