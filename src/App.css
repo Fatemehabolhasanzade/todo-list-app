@@ -16,12 +16,12 @@
   align-items: stretch;
   width: 60vw;
   height: 100vh;
-  border: 1px solid gray;
+  /* border: 1px solid gray; */
   overflow-y: auto;
   margin: 0 auto;
   padding: 0 1em;
   /* font-family: "Source Sans Pro", sans-serif; */
-  font-family: "Patrick Hand", cursive;
+  font-family: "Patrick Hand", vazir;
   background: url("./wood-background-1.jpg");
 }
 @media only screen and (max-width: 600px) {
@@ -30,6 +30,25 @@
     height: 100vh;
   }
 }
+
+.loginPage {
+  justify-content: center !important;
+}
+.loginItems {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+.login-btn {
+  margin-bottom: 0.5em !important;
+  background-color: #f5f5f5 !important;
+  color: #555 !important;
+  border: 1px solid #160805 !important;
+}
+.login-btn svg {
+  margin: 0.5em;
+}
+
 .firstLoad {
   display: flex;
   flex-direction: column;
@@ -37,7 +56,6 @@
   justify-content: space-evenly;
   align-items: center;
   height: 100vh;
-  background: url("./wood-background-1.jpg");
   color: #dedede;
   font-size: larger;
 }
@@ -51,9 +69,12 @@
   display: flex;
   flex-direction: column;
   flex-wrap: wrap;
-  justify-items: auto;
   justify-content: flex-start;
   align-items: flex-end;
+}
+.wellcome-fa h1 {
+  direction: rtl;
+  text-align: right;
 }
 .startApp {
   background-color: #7b4d35;
@@ -63,6 +84,18 @@
 .startApp:hover {
   cursor: pointer;
 }
+.lang-firstpage {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  width: 4em;
+  align-self: flex-end;
+  position: fixed;
+  top: 1em;
+  color: #dedede;
+}
+
 .header {
   color: #555;
   background-color: #f5f5f5;
@@ -81,7 +114,7 @@
 .settingItems {
   position: inherit;
   border-right: 2px solid;
-  padding-right: 1em;
+  padding-right: 0.5em;
   z-index: 2;
   top: 50px;
   right: 185px;
@@ -91,11 +124,47 @@
   flex-direction: column;
   flex-wrap: nowrap;
   justify-content: flex-start;
+  align-items: stretch;
+}
+.lang-inside {
+  display: flex;
+  flex-direction: row;
   align-items: center;
+  justify-content: space-between;
+}
+.lang-inside-fa {
+  flex-direction: row-reverse;
+}
+.lang-inside span {
+  font-size: small;
+}
+
+.login {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  /* width: 4em; */
+}
+.login span {
+  font-size: x-small;
+}
+.back {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  /* width: 4em; */
 }
 .exitApp {
   border-top: 1px solid;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  /* width: 4em; */
 }
+
 .form {
   display: flex;
   flex-wrap: nowrap;
@@ -104,6 +173,9 @@
   align-items: center;
   flex-wrap: nowrap;
   margin-top: 2em;
+}
+.form-fa {
+  flex-direction: row-reverse;
 }
 .form textarea {
   height: 25px;
@@ -154,7 +226,7 @@
   flex-direction: row;
   align-items: flex-end;
   border-bottom: 1px dotted #ccc;
-  text-indent: 6px;
+  text-indent: 4px;
   height: auto;
   text-transform: capitalize;
   position: relative;
@@ -245,13 +317,12 @@ button {
   opacity: 0.6;
 }
 .exitPage {
-  background: url("./wood-background-1.jpg");
   color: #dedede;
   font-size: xx-large;
   height: 100vh;
   display: flex;
-  align-items: flex-end;
-  justify-content: center;
+  justify-content: flex-end;
+  flex-direction: column;
 }
 .lastpage {
   display: flex;

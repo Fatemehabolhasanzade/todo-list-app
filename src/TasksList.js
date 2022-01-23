@@ -80,6 +80,12 @@ const TasksList = ({
                             onClose={handleClose}
                             aria-labelledby="alert-dialog-title"
                             aria-describedby="alert-dialog-description"
+                            sx={{
+                                display: 'flex',
+                                flexDirection: 'column',
+                                m: 'auto',
+                                width: "50%"
+                            }}
                         >
                             <DialogTitle id="alert-dialog-title">
                                 {`are you sure you want to delete "${todo}"?`}
